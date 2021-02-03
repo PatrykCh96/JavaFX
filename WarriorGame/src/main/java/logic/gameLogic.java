@@ -13,6 +13,8 @@ public class gameLogic {
     private String[][] details=new String[20][20];
     private String[][] characters=new String[20][20];
     private Coordinates currentLocation=new Coordinates(0, 0);
+    private boolean monsterIsOposit=false;
+    private int counter =0;
 
     public int getLastX() {
         return lastX;
@@ -75,11 +77,25 @@ public class gameLogic {
         }
     }
 
+    public void opositeMonster(){
+       if(!characters[getX()][getY()-1].equals("0") ||
+          !characters[getX()][getY()+1].equals("0")||
+          !characters[getX()-1][getY()].equals("0")||
+          !characters[getX()+1][getY()].equals("0")){
+           monsterIsOposit=true;
+       } else{
+           monsterIsOposit=false;
+       }
+        System.out.println(monsterIsOposit);
+    }
+
     private boolean canMoveTo(int x, int y){
-        if(characters[x][y]=="0"){
+        if(x<20 && x>=0 && y<20 && y>=00){
             if(details[x][y].equals("0") && textures[x][y].equals("G") || textures[x][y].equals("S")
-                    || textures[x][y].equals("D")   ){
-                return true;
+                    || textures[x][y].equals("D")){
+                if(characters[x][y].equals("0")){
+                    return true;
+                }
             }
         }
         return false;
