@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="630.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.gameControler">
+   <children>
+      <AnchorPane fx:id="anchorGrid" prefHeight="500.0" prefWidth="500.0" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="71.79999999999995" AnchorPane.topAnchor="0.0">
+         <children>
+            <GridPane fx:id="mapGrid" gridLinesVisible="true" layoutX="14.0" layoutY="7.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="500.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.20000000000004547" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="0.40000000000009095" AnchorPane.topAnchor="7.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="25.0" prefWidth="25.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="25.0" prefWidth="25.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="25.0" prefWidth="25.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="25.0" prefWidth="25.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="25.0" prefWidth="25.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="25.0" prefWidth="25.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="25.0" prefWidth="25.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="25.0" prefWidth="25.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="25.0" prefWidth="25.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="25.0" prefWidth="25.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="25.0" prefWidth="25.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="25.0" prefWidth="25.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="25.0" prefWidth="25.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="25.0" prefWidth="25.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="25.0" prefWidth="25.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="25.0" prefWidth="25.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="25.0" prefWidth="25.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="25.0" prefWidth="25.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="25.0" prefWidth="25.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="25.0" prefWidth="25.0" />
+
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <children>
+                  <AnchorPane fx:id="skala" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" />
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="menuGrid" layoutX="45.0" layoutY="545.0" prefHeight="50.0" prefWidth="540.0" AnchorPane.bottomAnchor="14.599999999999994" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0">
+         <children>
+            <GridPane gridLinesVisible="true" layoutX="-23.0" layoutY="4.0" minHeight="70.0" minWidth="70.0" prefHeight="70.0" prefWidth="556.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="-23.0" AnchorPane.rightAnchor="7.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="50.0" prefWidth="50.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="50.0" prefWidth="50.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
