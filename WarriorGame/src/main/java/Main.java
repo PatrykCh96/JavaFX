@@ -5,14 +5,16 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import logic.Armor;
+import logic.ArmorPart;
+import logic.InventoryObject;
 import logic.gameLogic;
 
 import java.io.FileNotFoundException;
 import java.nio.file.Paths;
-import static  logic.Coordinates.getX;
-import static logic.Coordinates.getY;
 
 public class Main extends Application {
     public static void main(String[] args) {
@@ -40,34 +42,36 @@ public class Main extends Application {
         scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent e) {
-                if(e.getCode().toString()=="W"){
+                if(e.getCode().toString().equals("W")){
                     try {
                         controler.getLogic().moveUp();
                         controler.move();
                     } catch (FileNotFoundException ex) {
                         ex.printStackTrace();
                     }
-                } else if(e.getCode().toString()=="S"){
+                } else if(e.getCode().toString().equals("S")){
                     try {
                         controler.getLogic().moveDown();
                         controler.move();
                     } catch (FileNotFoundException ex) {
                         ex.printStackTrace();
                     }
-                } else if(e.getCode().toString()=="A"){
+                } else if(e.getCode().toString().equals("A")){
                     try {
                         controler.getLogic().moveLeft();
                         controler.move();
                     } catch (FileNotFoundException ex) {
                         ex.printStackTrace();
                     }
-                } else if(e.getCode().toString()=="D"){
+                } else if(e.getCode().toString().equals("D")){
                     try {
                         controler.getLogic().moveRight();
                         controler.move();
                     } catch (FileNotFoundException ex) {
                         ex.printStackTrace();
                     }
+                } else if(e.getCode().toString().equals("E")){
+                    logic.attack();
                 }
             }
         });

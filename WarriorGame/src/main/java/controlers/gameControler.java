@@ -45,7 +45,6 @@ public  class gameControler{
     }
 
     public void move() throws FileNotFoundException {
-        logic.opositeMonster();
         String[][] characters=logic.getCharacters();
         for(int y=0; y<20;y++) {
             for (int x = 0; x < 20; x++) {

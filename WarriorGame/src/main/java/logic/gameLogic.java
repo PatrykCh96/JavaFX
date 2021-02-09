@@ -4,28 +4,29 @@ import controlers.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
-import static  logic.Coordinates.getX;
-import static logic.Coordinates.getY;
 
 public class gameLogic {
     private String[][] textures=new String[20][20];
     private String[][] details=new String[20][20];
     private String[][] characters=new String[20][20];
     private Coordinates currentLocation=new Coordinates(0, 0);
+    private ArrayList<Monster> monstersList=new ArrayList<>();
+    private ArrayList<Monster> monstersListOposit=new ArrayList<>();
     private boolean monsterIsOposit=false;
     private int counter =0;
+    private int lastX=0;
+    private int lastY=0;
 
     public int getLastX() {
         return lastX;
     }
-
     public int getLastY() {
         return lastY;
     }
-
-    private int lastX=0;
-    private int lastY=0;
 
     public gameLogic() throws FileNotFoundException {
         mapBuilder();
@@ -34,59 +35,117 @@ public class gameLogic {
 
 
     public void moveLeft() throws FileNotFoundException {
-        if(canMoveTo(getX()-1, currentLocation.getY())){
-            lastX=getX();
-            lastY=getY();
-            characters[getX()][getY()]="0";
+        if(canMoveTo(currentLocation.getX()-1, currentLocation.getY())){
+            lastX=currentLocation.getX();
+            lastY=currentLocation.getY();
+            characters[currentLocation.getX()][currentLocation.getY()]="0";
             currentLocation.setX(currentLocation.getX()-1);
             currentLocation.setY(currentLocation.getY() );
-            characters[getX()][getY()]="@";
+            characters[currentLocation.getX()][currentLocation.getY()]="@";
         }
+        opositeMonster();
     }
-
     public void moveRight() throws FileNotFoundException {
-        if(canMoveTo(getX()+1, currentLocation.getY())){
-            lastX=getX();
-            lastY=getY();
-            characters[getX()][getY()]="0";
+        if(canMoveTo(currentLocation.getX()+1, currentLocation.getY())){
+            lastX=currentLocation.getX();
+            lastY=currentLocation.getY();
+            characters[currentLocation.getX()][currentLocation.getY()]="0";
             currentLocation.setX(currentLocation.getX()+1);
             currentLocation.setY(currentLocation.getY() );
-            characters[getX()][getY()]="@";
+            characters[currentLocation.getX()][currentLocation.getY()]="@";
         }
+        opositeMonster();
     }
-
     public void moveUp() throws FileNotFoundException {
-        if(canMoveTo(getX(), currentLocation.getY()-1)){
-            lastX=getX();
-            lastY=getY();
-            characters[getX()][getY()]="0";
+        if(canMoveTo(currentLocation.getX(), currentLocation.getY()-1)){
+            lastX=currentLocation.getX();
+            lastY=currentLocation.getY();
+            characters[currentLocation.getX()][currentLocation.getY()]="0";
             currentLocation.setX(currentLocation.getX());
             currentLocation.setY(currentLocation.getY()-1 );
-            characters[getX()][getY()]="@";
+            characters[currentLocation.getX()][currentLocation.getY()]="@";
         }
+        opositeMonster();
     }
-
     public void moveDown() throws FileNotFoundException {
-        if (canMoveTo(getX(), currentLocation.getY() + 1)) {
-            lastX=getX();
-            lastY=getY();
-            characters[getX()][getY()] = "0";
+        if (canMoveTo(currentLocation.getX(), currentLocation.getY() + 1)) {
+            lastX=currentLocation.getX();
+            lastY=currentLocation.getY();
+            characters[currentLocation.getX()][currentLocation.getY()] = "0";
             currentLocation.setX(currentLocation.getX());
             currentLocation.setY(currentLocation.getY() + 1);
-            characters[getX()][getY()] = "@";
+            characters[currentLocation.getX()][currentLocation.getY()] = "@";
         }
+        opositeMonster();
     }
 
     public void opositeMonster(){
-       if(!characters[getX()][getY()-1].equals("0") ||
-          !characters[getX()][getY()+1].equals("0")||
-          !characters[getX()-1][getY()].equals("0")||
-          !characters[getX()+1][getY()].equals("0")){
-           monsterIsOposit=true;
-       } else{
-           monsterIsOposit=false;
-       }
-        System.out.println(monsterIsOposit);
+        monstersListOposit.clear();
+        if(currentLocation.getX()==0 && currentLocation.getY()==0){  //left top corner
+            monsterIsOposit=!characters[currentLocation.getX()][currentLocation.getY()+1].equals("0")||
+                    !characters[currentLocation.getX()+1][currentLocation.getY()].equals("0");
+        } else if(currentLocation.getX()==19 && currentLocation.getY()==19) {  //right down corner
+            monsterIsOposit = !characters[currentLocation.getX()][currentLocation.getY() - 1].equals("0") ||
+                    !characters[currentLocation.getX() - 1][currentLocation.getY()].equals("0");
+        } else if(currentLocation.getX()==19 && currentLocation.getY()==0){  //right top corner
+            monsterIsOposit=!characters[currentLocation.getX()-1][currentLocation.getY()].equals("0") ||
+                    !characters[currentLocation.getX()][currentLocation.getY()+1].equals("0");
+        } else if(currentLocation.getX()==0 && currentLocation.getY()==19){  //left down corner
+            monsterIsOposit=!characters[currentLocation.getX()][currentLocation.getY()-1].equals("0") ||
+                    !characters[currentLocation.getX()+1][currentLocation.getY()].equals("0");
+        } else{
+            if(currentLocation.getY()==19){ //down border
+                monsterIsOposit= !characters[currentLocation.getX()][currentLocation.getY()-1].equals("0") ||
+                        !characters[currentLocation.getX()-1][currentLocation.getY()].equals("0")||
+                        !characters[currentLocation.getX()+1][currentLocation.getY()].equals("0");
+
+                if(!characters[currentLocation.getX()][currentLocation.getY()-1].equals("0")) monstersListOposit.add(monsterFromCoordinate(currentLocation.getX(), currentLocation.getY()-1));
+                if(!characters[currentLocation.getX()][currentLocation.getY()-1].equals("0")) monstersListOposit.add(monsterFromCoordinate(currentLocation.getX()-1, currentLocation.getY()));
+                if(!characters[currentLocation.getX()][currentLocation.getY()-1].equals("0")) monstersListOposit.add(monsterFromCoordinate(currentLocation.getX()+1, currentLocation.getY()));
+            }
+            else if(currentLocation.getX()==0){ //left border
+                monsterIsOposit= !characters[currentLocation.getX()][currentLocation.getY()+1].equals("0")||
+                        !characters[currentLocation.getX()][currentLocation.getY()-1].equals("0")||
+                        !characters[currentLocation.getX()+1][currentLocation.getY()].equals("0");
+                System.out.println(monsterIsOposit);
+            } else if(currentLocation.getX()==19){
+                monsterIsOposit= !characters[currentLocation.getX()][currentLocation.getY()-1].equals("0") ||
+                        !characters[currentLocation.getX()][currentLocation.getY()+1].equals("0")||
+                        !characters[currentLocation.getX()-1][currentLocation.getY()].equals("0");
+                System.out.println(monsterIsOposit);
+            }else if(currentLocation.getY()==0){
+                monsterIsOposit=!characters[currentLocation.getX()-1][currentLocation.getY()].equals("0") ||
+                        !characters[currentLocation.getX()][currentLocation.getY()+1].equals("0")||
+                        !characters[currentLocation.getX()+1][currentLocation.getY()].equals("0");
+                System.out.println(monsterIsOposit);
+            } else {
+                monsterIsOposit=!characters[currentLocation.getX()-1][currentLocation.getY()].equals("0") ||
+                        !characters[currentLocation.getX()][currentLocation.getY()+1].equals("0")||
+                        !characters[currentLocation.getX()+1][currentLocation.getY()].equals("0") ||
+                        !characters[currentLocation.getX()][currentLocation.getY()-1].equals("0");
+                if(!characters[currentLocation.getX()][currentLocation.getY()-1].equals("0")) monstersListOposit.add(monsterFromCoordinate(currentLocation.getX(), currentLocation.getY()-1));
+                if(!characters[currentLocation.getX()][currentLocation.getY()+1].equals("0")) monstersListOposit.add(monsterFromCoordinate(currentLocation.getX(), currentLocation.getY()+1));
+                if(!characters[currentLocation.getX()-1][currentLocation.getY()].equals("0")) monstersListOposit.add(monsterFromCoordinate(currentLocation.getX()-1, currentLocation.getY()));
+                if(!characters[currentLocation.getX()+1][currentLocation.getY()].equals("0")) monstersListOposit.add(monsterFromCoordinate(currentLocation.getX()+1, currentLocation.getY()));
+            }
+        }
+        System.out.println(monstersListOposit);
+    }
+
+    public void attack(){
+        if(!monstersList.isEmpty()){
+            monsterFromCoordinate(monstersListOposit.get(0).getX(), monstersListOposit.get(0).getY()).getDamage(10);
+        }
+        System.out.println(monstersList);
+    }
+
+    public Monster monsterFromCoordinate(int x, int y){
+        for(Monster monster: monstersList){
+            if(monster.getX()==x&& monster.getY()==y){
+                return monster;
+            }
+        }
+        return null;
     }
 
     private boolean canMoveTo(int x, int y){
@@ -100,6 +159,7 @@ public class gameLogic {
         }
         return false;
     }
+
 
     private void mapBuilder(){
         try {
@@ -168,9 +228,13 @@ public class gameLogic {
                         currentLocation=new Coordinates(x, y);
                     }
                     break;
-                    case "!": characters[x][y]="!";
+                    case "!": {characters[x][y]="!";
+                                monstersList.add(new Monster("Fly", 80, 15, x, y));
+                    }
                         break;
-                    case "*": characters[x][y]="*";
+                    case "*": {characters[x][y]="*";
+                        monstersList.add(new Monster("Skeleton", 100, 25, x, y));
+                    }
                         break;
                     default: characters[x][y]="0";
                 }
